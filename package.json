@@ -1,0 +1,20 @@
+{
+  "name": "logistical",
+  "version": "1.0.0",
+  "description": "Public open source solution to logistics management",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "react-qr-code": "^2.0.6",
+    "react-icons": "^4.8.0"
+  },
+  "devDependencies": {}
+}
