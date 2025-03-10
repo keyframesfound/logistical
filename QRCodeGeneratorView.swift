@@ -15,9 +15,12 @@ struct QRCodeGeneratorView: View {
                 .padding()
             Button("Generate QR Code") {
                 qrImage = generateQRCode(from: inputText)
+                inputText = ""
             }
             .padding()
             if let qrImage = qrImage {
+                Text("QR Code:") // new label for clarity
+                    .font(.headline)
                 qrImage
                     .resizable()
                     .interpolation(.none)

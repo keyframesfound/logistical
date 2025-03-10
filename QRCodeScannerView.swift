@@ -25,6 +25,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var completion: ((String) -> Void)?
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    let restartButton = UIButton(type: .system)
+    let instructionLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +56,42 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer.frame = view.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+        
+        // Add instruction overlay
+        instructionLabel.text = "Align QR code within frame to scan"
+        instructionLabel.textColor = .white
+        instructionLabel.textAlignment = .center
+        instructionLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(instructionLabel)
+        
+        NSLayoutConstraint.activate([
+            instructionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            instructionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        // Add restart button overlay
+        restartButton.setTitle("Restart Scan", for: .normal)
+        restartButton.backgroundColor = UIColor(white: 0.1, alpha: 0.7)
+        restartButton.setTitleColor(.white, for: .normal)
+        restartButton.layer.cornerRadius = 8
+        restartButton.translatesAutoresizingMaskIntoConstraints = false
+        restartButton.addTarget(self, action: #selector(restartScanning), for: .touchUpInside)
+        view.addSubview(restartButton)
+        
+        NSLayoutConstraint.activate([
+            restartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            restartButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            restartButton.widthAnchor.constraint(equalToConstant: 140),
+            restartButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
+        
         captureSession.startRunning()
+    }
+    
+    @objc func restartScanning() {
+        if !captureSession.isRunning {
+            captureSession.startRunning()
+        }
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput,

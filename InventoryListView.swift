@@ -5,16 +5,23 @@ struct InventoryListView: View {
     
     var body: some View {
         NavigationView {
-            List(inventoryModel.items) { item in
-                VStack(alignment: .leading) {
-                    Text(item.name)
-                        .font(.headline)
-                    Text("Scanned on \(item.dateScanned, formatter: itemFormatter)")
-                        .font(.subheadline)
+            List {
+                ForEach(inventoryModel.items) { item in
+                    VStack(alignment: .leading) {
+                        Text(item.name)
+                            .font(.headline)
+                        Text("Scanned on \(item.dateScanned, formatter: itemFormatter)")
+                            .font(.subheadline)
+                    }
                 }
+                .onDelete(perform: deleteItems)
             }
             .navigationTitle("Inventory")
         }
+    }
+    
+    func deleteItems(at offsets: IndexSet) {
+        inventoryModel.items.remove(atOffsets: offsets)
     }
 }
 
