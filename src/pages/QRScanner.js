@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+wimport React, { useState } from 'react';
 import QrReader from 'react-qr-reader';
 
 function QRScanner() {
