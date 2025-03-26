@@ -21,7 +21,6 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
-import TimelineGroup from '@mui/lab/TimelineGroup';
 import SpeedIcon from '@mui/icons-material/Speed';
 import SecurityIcon from '@mui/icons-material/Security';
 import CloudIcon from '@mui/icons-material/Cloud';
@@ -191,35 +190,33 @@ const About: React.FC = () => {
                         Milestones that shaped our success
                     </Typography>
                     <Timeline position={isMobile ? 'right' : 'alternate'}>
-                        <TimelineGroup>
-                            {milestones.map((milestone, index) => (
-                                <TimelineItem key={index}>
-                                    <TimelineOppositeContent color="text.secondary">
-                                        {milestone.year}
-                                    </TimelineOppositeContent>
-                                    <TimelineSeparator>
-                                        <TimelineDot color="primary" />
-                                        {index < milestones.length - 1 && <TimelineConnector />}
-                                    </TimelineSeparator>
-                                    <TimelineContent>
-                                        <Paper
-                                            elevation={3}
-                                            sx={{
-                                                p: 3,
-                                                background: theme.palette.background.default,
-                                            }}
-                                        >
-                                            <Typography variant="h6" gutterBottom>
-                                                {milestone.title}
-                                            </Typography>
-                                            <Typography color="text.secondary">
-                                                {milestone.description}
-                                            </Typography>
-                                        </Paper>
-                                    </TimelineContent>
-                                </TimelineItem>
-                            ))}
-                        </TimelineGroup>
+                        {milestones.map((milestone, index) => (
+                            <TimelineItem key={index}>
+                                <TimelineOppositeContent color="text.secondary">
+                                    {milestone.year}
+                                </TimelineOppositeContent>
+                                <TimelineSeparator>
+                                    <TimelineDot color="primary" />
+                                    {index < milestones.length - 1 && <TimelineConnector />}
+                                </TimelineSeparator>
+                                <TimelineContent>
+                                    <Paper
+                                        elevation={3}
+                                        sx={{
+                                            p: 3,
+                                            background: theme.palette.background.default,
+                                        }}
+                                    >
+                                        <Typography variant="h6" gutterBottom>
+                                            {milestone.title}
+                                        </Typography>
+                                        <Typography color="text.secondary">
+                                            {milestone.description}
+                                        </Typography>
+                                    </Paper>
+                                </TimelineContent>
+                            </TimelineItem>
+                        ))}
                     </Timeline>
                 </Container>
             </Box>
