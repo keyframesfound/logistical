@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { Item } from '../types/Item';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const isDevelopment = process.env.NODE_ENV === 'development';
+const API_URL = isDevelopment 
+    ? 'http://localhost:5000/api'
+    : 'https://your-backend-url.com/api'; // Replace with your actual backend URL
 
 const api = axios.create({
     baseURL: API_URL,
