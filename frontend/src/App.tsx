@@ -1,23 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { theme } from './theme';
+import LandingPage from './components/LandingPage';
+import Dashboard from './components/Dashboard';
+import About from './components/About';
 import Navbar from './components/Navbar';
-import Inventory from './pages/Inventory';
-import QRGenerator from './pages/QRGenerator';
-import QRScanner from './pages/QRScanner';
-
-const theme = createTheme({
-    palette: {
-        mode: 'light',
-        primary: {
-            main: '#1976d2',
-        },
-        secondary: {
-            main: '#dc004e',
-        },
-    },
-});
 
 function App() {
     return (
@@ -26,9 +15,9 @@ function App() {
             <Router>
                 <Navbar />
                 <Routes>
-                    <Route path="/" element={<Inventory />} />
-                    <Route path="/generate" element={<QRGenerator />} />
-                    <Route path="/scan" element={<QRScanner />} />
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/about" element={<About />} />
                 </Routes>
             </Router>
         </ThemeProvider>
