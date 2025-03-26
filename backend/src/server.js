@@ -8,8 +8,18 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+    origin: [
+        'http://localhost:3000',
+        'https://ryanyeung.github.io'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // MongoDB Connection
@@ -26,6 +36,12 @@ app.use('/api/items', itemRoutes);
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to Logistical API' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Something went wrong!' });
 });
 
 // Start server
